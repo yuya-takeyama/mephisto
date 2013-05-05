@@ -1,0 +1,8 @@
+{
+  "name": "My Application",
+  "version": "0.0.1",
+  "dependencies": {
+    "bootstrap": "http://twitter.github.com/bootstrap/assets/bootstrap.zip",
+		"jquery": "latest"
+  }
+}
