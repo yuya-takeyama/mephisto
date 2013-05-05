@@ -1,4 +1,4 @@
-module PadrinoBootstrapBoilerplate
+module Mephisto
   class App < Padrino::Application
     register LessInitializer
     register Padrino::Rendering
