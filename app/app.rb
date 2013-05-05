@@ -59,11 +59,19 @@ module Mephisto
     #   end
 
     before %r{^/charts|^/$} do
+      @services = ChartGroup.services
+
       if params[:service_name]
         @service_name = params[:service_name]
+        @sections = ChartGroup.sections(service_name: params[:service_name])
 
         if params[:section_name]
           @section_name = params[:section_name]
+          @chart_groups = ChartGroup.all(
+            service_name: @service_name,
+            section_name: @section_name,
+            order: 'name',
+          )
 
           if params[:chart_group_name]
             @chart_group_name = params[:chart_group_name]
@@ -104,23 +112,14 @@ module Mephisto
     end
 
     get :charts, :with => [:service_name, :section_name] do
-      @chart_groups = ChartGroup.all(
-        service_name: @service_name,
-        section_name: @section_name,
-        order: 'name',
-      )
       render :section
     end
 
     get :charts, :with => :service_name do
-      @sections = ChartGroup.sections(service_name: params[:service_name])
-
       render :service
     end
 
     get :index do
-      @services = ChartGroup.services
-
       render :index
     end
   end

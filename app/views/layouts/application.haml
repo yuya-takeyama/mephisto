@@ -19,30 +19,7 @@
     = javascript_include_tag '/vendor/morris.js/morris.min.js'
     = javascript_include_tag :application
   %body
-
-    .navbar.navbar-inverse.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-
-          %a.brand{href: "/"} Mephisto
-
-          .nav-collapse.collapse
-            %ul.nav
-              %li.dropdown
-                %a.dropdown-toggle(href="#" data-toggle="dropdown")
-                  Menu
-                  %b.carret
-                %ul.dropdown-menu
-                  %li
-                    %a(href="/foo") foo
-                  %li
-                    %a(href="/bar") bar
-                  %li
-                    %a(href="/baz") baz
+    = partial 'nav'
 
     .container
       = partial 'breadcrumb'

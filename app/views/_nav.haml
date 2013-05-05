@@ -1,0 +1,41 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+
+      %a.brand{href: url(:index)} Mephisto
+
+      .nav-collapse.collapse
+        %ul.nav
+          %li.dropdown
+            %a.dropdown-toggle(href="#" data-toggle="dropdown")
+              Service
+              %b.carret
+            %ul.dropdown-menu
+              - @services.each do |service|
+                %li{class: @service_name == service ? 'active' : nil}
+                  =link_to service, url(:charts, service)
+
+          - if defined?(@sections) and (not @sections.empty?)
+            %li.dropdown
+              %a.dropdown-toggle(href="#" data-toggle="dropdown")
+                Section
+                %b.carret
+              %ul.dropdown-menu
+                - @sections.each do |section|
+                  %li{class: @section_name == section ? 'active' : nil}
+                    =link_to section, url(:charts, @service_name, section)
+
+          - if defined?(@sections) and defined?(@chart_groups) and (not @chart_groups.empty?)
+            %li.dropdown
+              %a.dropdown-toggle(href="#" data-toggle="dropdown")
+                Metrics
+                %b.carret
+              %ul.dropdown-menu
+                - @chart_groups.each do |chart_group|
+                  %li{class: @chart_group_name == chart_group.name ? 'active' : nil}
+                    =link_to chart_group.name, url(:charts, @service_name, @section_name, chart_group.name)
+
