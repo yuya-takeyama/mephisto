@@ -58,9 +58,64 @@ module PadrinoBootstrapBoilerplate
     #     render 'errors/505'
     #   end
 
-    get '/' do
-      render :index
+    before %r{^/charts|^/$} do
+      if params[:service_name]
+        @service_name = params[:service_name]
+
+        if params[:section_name]
+          @section_name = params[:section_name]
+
+          if params[:chart_group_name]
+            @chart_group_name = params[:chart_group_name]
+            @chart_group      = ChartGroup.first(
+              service_name: @service_name,
+              section_name: @section_name,
+              name: @chart_group_name,
+            )
+
+            if params[:chart_name]
+              @chart_name = params[:chart_name]
+              @chart      = Chart.first(
+                chart_group_id: @chart_group.id,
+                name: @chart_name,
+              )
+            end
+          end
+        end
+      end
     end
 
+    get :charts, :with => [:service_name, :section_name, :chart_group_name, :chart_name] do
+    end
+
+    get :charts, :with => [:service_name, :section_name, :chart_group_name] do
+      @charts = Chart.all(
+        chart_group_id: @chart_group.id,
+        order: 'name',
+      )
+
+      render :chart_group
+    end
+
+    get :charts, :with => [:service_name, :section_name] do
+      @chart_groups = ChartGroup.all(
+        service_name: @service_name,
+        section_name: @section_name,
+        order: 'name',
+      )
+      render :section
+    end
+
+    get :charts, :with => :service_name do
+      @sections = ChartGroup.sections(service_name: params[:service_name])
+
+      render :service
+    end
+
+    get :index do
+      @services = ChartGroup.services
+
+      render :index
+    end
   end
 end

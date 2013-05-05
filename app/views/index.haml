@@ -1,1 +1,6 @@
 %h2 Choose a service
+
+%ul
+  - @services.each do |service|
+    %li
+      = link_to(service, url(:charts, service))
