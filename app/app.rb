@@ -72,6 +72,11 @@ module PadrinoBootstrapBoilerplate
               section_name: @section_name,
               name: @chart_group_name,
             )
+            @charts = Chart.all(
+              chart_group_id: @chart_group.id,
+              order: 'name',
+            )
+
 
             if params[:chart_name]
               @chart_name = params[:chart_name]
@@ -95,12 +100,7 @@ module PadrinoBootstrapBoilerplate
     end
 
     get :charts, :with => [:service_name, :section_name, :chart_group_name] do
-      @charts = Chart.all(
-        chart_group_id: @chart_group.id,
-        order: 'name',
-      )
-
-      render :chart_group
+      render :chart
     end
 
     get :charts, :with => [:service_name, :section_name] do

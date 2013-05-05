@@ -1,4 +1,18 @@
-%h2
-  = @chart.name
+- if defined?(@chart)
+  %h2= "#{@chart_group_name} / #{@chart.name}"
+- else
+  %h2= @chart_group_name
 
-!= @chart.render_morris_chart
+.container-fluid
+  .row-fluid
+    .span2
+      %ul.nav.nav-pills.nav-stacked
+        - @charts.each do |chart|
+          %li{class: (defined?(@chart_name) and chart.name == @chart_name) ? 'active' : nil}
+            = link_to chart.name, url(:charts, @service_name, @section_name, @chart_group_name, chart.name)
+
+    - if defined?(@chart)
+      .span10
+        != @chart.render_morris_chart
+    - else
+      %h3 Choose a chart
