@@ -1,5 +1,6 @@
 - if defined?(@chart)
-  %h2= "#{@chart_group_name} / #{@chart.name}"
+  %h2
+    = "#{@chart_group_name} / #{@chart.name}"
 - else
   %h2= @chart_group_name
 
@@ -11,8 +12,10 @@
           %li{class: (defined?(@chart_name) and chart.name == @chart_name) ? 'active' : nil}
             = link_to chart.name, url(:charts, @service_name, @section_name, @chart_group_name, chart.name)
 
-    - if defined?(@chart)
-      .span10
+    .span10
+      - if defined?(@chart)
         != @chart.render_morris_chart
-    - else
-      %h3 Choose a chart
+      - else
+        - @charts.each do |chart|
+          %h3= chart.name
+          != chart.render_morris_chart
