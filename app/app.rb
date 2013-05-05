@@ -86,6 +86,12 @@ module PadrinoBootstrapBoilerplate
     end
 
     get :charts, :with => [:service_name, :section_name, :chart_group_name, :chart_name] do
+      @stats = Stat.all(
+        chart_id: @chart.id,
+        order: 'label',
+      )
+
+      render :chart
     end
 
     get :charts, :with => [:service_name, :section_name, :chart_group_name] do

@@ -3,6 +3,7 @@
 .DS_Store
 .powenv
 log/**/*
+tmp/*
 tmp/**/*
 bin/*
 config/database.rb
