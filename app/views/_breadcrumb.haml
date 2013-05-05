@@ -1,0 +1,28 @@
+%ul.breadcrumb
+  %li
+    - if @service_name
+      =link_to 'Home', url(:index)
+      %span.divider /
+    - else
+      Home
+  - if @section_name
+    %li
+      =link_to @service_name, url(:charts, @service_name)
+      %span.divider /
+  - else
+    %li
+      =@service_name
+  - if @chart_group_name
+    %li
+      =link_to @section_name, url(:charts, @service_name, @section_name)
+      %span.divider /
+    %li
+      - if @chart_name
+        =link_to @chart_group_name, url(:charts, @service_name, @section_name, @chart_group_name)
+        %span.divider /
+        =@chart_name
+      - else
+        =@chart_group_name
+  - else
+    %li
+      =@section_name

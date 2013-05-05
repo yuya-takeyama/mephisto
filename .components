@@ -1,0 +1,9 @@
+---
+:orm: datamapper
+:test: rspec
+:mock: rr
+:script: jquery
+:renderer: haml
+:stylesheet: less
+:namespace: Mephisto
+:migration_format: number

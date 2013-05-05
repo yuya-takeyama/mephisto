@@ -1,0 +1,5 @@
+%h2 Choose a chart
+%ul
+  - @chart_groups.each do |chart_group|
+    %li
+      =link_to chart_group.name, url(:charts, @service_name, @section_name, chart_group.name)

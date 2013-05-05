@@ -1,0 +1,15 @@
+*.swp
+.bundle/
+.DS_Store
+.powenv
+log/**/*
+tmp/*
+tmp/**/*
+bin/*
+config/apps.rb
+config/database.rb
+vendor/bundle
+vendor/gems/*
+!vendor/gems/cache/
+.sass-cache/*
+db/*.db

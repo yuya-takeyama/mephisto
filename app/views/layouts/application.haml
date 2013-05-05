@@ -1,0 +1,27 @@
+!!! 5
+%html
+  %head
+    %meta{:name => "viewport", :content => "width=device-width"}
+    %title Mephisto
+
+    = stylesheet_link_tag '/vendor/bootstrap/css/bootstrap.min.css'
+    = stylesheet_link_tag '/vendor/morris.js/morris.css'
+    :css
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    = stylesheet_link_tag '/vendor/bootstrap/css/bootstrap-responsive.min.css'
+
+    = javascript_include_tag '/vendor/jquery/jquery.min.js'
+    = javascript_include_tag '/vendor/bootstrap/js/bootstrap.min.js'
+    = javascript_include_tag '/vendor/raphael/raphael-min.js'
+    = javascript_include_tag '/vendor/morris.js/morris.min.js'
+    = javascript_include_tag :application
+  %body
+    = partial 'nav'
+
+    .container
+      = partial 'breadcrumb'
+
+      = yield
