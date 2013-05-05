@@ -6,6 +6,7 @@ log/**/*
 tmp/*
 tmp/**/*
 bin/*
+config/apps.rb
 config/database.rb
 vendor/bundle
 vendor/gems/*
